@@ -1,0 +1,318 @@
+---
+import {Icon} from 'astro-icon';
+import {mainContent, links, socialLinks} from '../links';
+---
+
+<html lang="es">
+	<head>
+    <link rel="website icon" type="icon" href="/log.png">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Página de Registro</title>
+    <style>
+      body {
+        background-image: url(/2.jpg);
+        background-color: rgb(0, 0, 0);
+        background-size: auto;
+        background-repeat:no-repeat;
+        background-position: center;
+        color: rgb(255, 255, 255);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      a {
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .main__article {
+        margin: 0 auto;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        min-height: 90vh;
+      }
+      .top__content {
+        text-align: center;
+      }
+      .profile__img {
+        border-radius: 50%;
+        /* margin-bottom: 1rem; */
+      }
+      .social-links__list {
+        display: grid;
+        grid-template-columns: repeat(4, 6fr);
+        grid-gap: 7rem;
+      }
+      .social-links__list .social-links__link {
+        transition: transform 100ms ease-in-out;
+      }
+      .social-links__list .social-links__link:hover { 
+        transform: scale(1.1);
+      }
+      .links__list {
+        width: 100%;
+        margin: 1rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .links__list .links__link {
+        display: flex;
+        width: 100%;
+        text-align: center;
+        background-color: rgb(4, 4, 4);
+        color: #212121;
+        margin-bottom: 1rem;
+        border-radius: 3rem;
+        transition: transform 100ms ease-in-out;
+        cursor: pointer;
+      }
+      .links__list .links__link a {
+        padding: 1rem 2rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .links__list .links__link:hover {
+        transform: scale(1.025);
+      }
+      .container{
+        max-width: 800px;
+        max-height: 450px;
+        width: 100%;
+        background-color: rgb(0, 0, 0);
+        padding: 10px 33px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+      }
+      .container .title{
+        font-size: 25px;
+        font-weight: 500;
+        position: relative;
+      }
+      .container .title::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 300px;
+        border-radius: 5px;
+        background: linear-gradient(135deg, #459e42, #053982);
+      }
+      .content form .user-details{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px 0 12px 0;
+      }
+      form .user-details .input-box{
+        margin-bottom: 15px;
+        width: calc(100% / 2 - 20px);
+      }
+      form .input-box span.details{
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      .user-details .input-box input{
+        height: 45px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+        transition: all 0.3s ease;
+      }
+      .user-details .input-box input:focus,
+      .user-details .input-box input:valid{
+        border-color: #9b59b6;
+      }
+      form .gender-details .gender-title{
+        font-size: 20px;
+        font-weight: 500;
+      }
+      form .category{
+        display: flex;
+        width: 80%;
+        margin: 14px 0 ;
+        justify-content: space-between;
+      }
+      form .category label{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      form .category label .dot{
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        margin-right: 10px;
+        background: #d9d9d9;
+        border: 5px solid transparent;
+        transition: all 0.3s ease;
+      }
+      #dot-1:checked ~ .category label .one,
+      #dot-2:checked ~ .category label .two,
+      #dot-3:checked ~ .category label .three{
+        background: #000000;
+        border-color: #d9d9d9;
+      }
+      form input[type="radio"]{
+        display: none;
+      }
+      form .button{
+        height: 45px;
+        margin: 35px 0
+      }
+      form .button button{
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #053982, #459e42);
+      }
+      form .button button:hover{
+        /* transform: scale(0.99); */
+        background: linear-gradient(-135deg, #053982, #459e42);
+        }
+      @media(max-width: 584px){
+      .container{
+        max-width: 100%;
+      }
+      form .user-details .input-box{
+          margin-bottom: 15px;
+          width: 100%;
+        }
+        form .category{
+          width: 100%;
+        }
+        .content form .user-details{
+          max-height: 300px;
+          overflow-y: scroll;
+        }
+        .user-details::-webkit-scrollbar{
+          width: 5px;
+        }
+        }
+        @media(max-width: 459px){
+        .container .content .category{
+          flex-direction: column;
+        }
+      }
+        footer {
+        position: relative;
+        height: 125px;
+        width: 100%;
+      }
+        p.copyright {
+        position: absolute;
+        width: 100%;
+        color: #fff;
+        line-height: 20px;
+        font-size: 0.7em;
+        text-align: center;
+        bottom:0;
+      }
+      footer h2{
+        text-align: center;
+      }
+    </style>
+	</head>
+	<body>
+    <article class="main__article">
+      <div class="top__content">
+        <h1>{mainContent.name}</h1>
+        <img class="profile__img" width="128px" height="128px" src={mainContent.imgSrc} alt={`Profile image of ${mainContent.name}`} />
+        <p>{mainContent.tagline}</p>
+      </div>
+      <div class="container">
+        <div class="title">Ingrese sus datos para realizar la postulación</div>
+        <div class="content">
+          <form action="#">
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">Nombres</span> 
+                <input type="text" placeholder="Ingrese sus nombres" required>
+              </div>
+              <div class="input-box">
+                <span class="details">Apellidos</span>
+                <input type="text" placeholder="Ingrese sus apellidos" required>
+              </div>
+              <div class="input-box">
+                <span class="details">Número de Cédula</span>
+                <input type="text" placeholder="Ingrese su cédula" required>
+              </div>
+              <div class="input-box">
+                <span class="details">Correo Electrónico</span>
+                <input type="text" placeholder="Ingrese su correo" required>
+              </div>
+              <div class="input-box">
+                <span class="details">Número Telefónico</span>
+                <input type="text" placeholder="Ingrese su teléfono" required>
+              </div>
+              <div class="input-box">
+                <span class="details">Número Fijo</span>
+                <input type="text" placeholder="Ingrese su teléfono fijo" required>
+              </div>
+            </div>
+            <div class="gender-details">
+              <input type="radio" name="gender" id="dot-1">
+              <input type="radio" name="gender" id="dot-2">
+              <input type="radio" name="gender" id="dot-3">
+              <span class="gender-title">Género</span>
+              <div class="category">
+                <label for="dot-1">
+                <span class="dot one"></span>
+                <span class="gender">Hombre</span>
+              </label>
+              <label for="dot-2">
+                <span class="dot two"></span>
+                <span class="gender">Mujer</span>
+              </label>
+              <label for="dot-3">
+                <span class="dot three"></span>
+                <span class="gender">Prefiero no contestar</span>
+                </label>
+              </div>
+            </div>
+            <div class="button">
+              <button type="submit" id="opeModal">Enviar</button>
+            </div>
+            <footer>
+              <div>
+                <h2 class="pls">¡Contáctate con Nosotros!</h2>
+                <ul class="social-links__list">
+                  {socialLinks.map((link) => (
+                    <li class="social-links__link">
+                      <a href={link.url}>
+                        <Icon name={link.icon} width="36px" height="36px" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <p class="copyright">© Instituto Superior Tecnológico "Los Andes"</p>    
+              </div>
+            </footer>
+          </form>
+        </div>
+      </div>
+    </article>
+	</body>
+  </html>
